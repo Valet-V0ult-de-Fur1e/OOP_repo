@@ -5,6 +5,7 @@
 #include <cstddef>
 #include <iostream>
 #include "complex/complex.hpp"
+
 class StackArr
 {
 public:
@@ -16,6 +17,7 @@ public:
 
 	void Push(const Complex& newItem);
 	void Pop();
+	void Resize();
 	
 	bool IsEmpty();
 
@@ -25,8 +27,9 @@ public:
 
 
 private:
-	Complex* dataPtr = nullptr;
 	std::ptrdiff_t size = 0;
+	std::ptrdiff_t capacity = 0;
+	Complex* dataPtr = nullptr;
 };
 
 

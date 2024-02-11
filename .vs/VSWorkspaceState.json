@@ -1,0 +1,18 @@
+{
+  "OutputFoldersPerTargetSystem": {
+    "Локальный компьютер": [
+      "out\\build\\x64-Debug",
+      "out\\install\\x64-Debug"
+    ]
+  },
+  "ExpandedNodes": [
+    "",
+    "\\pr.test",
+    "\\prj.codeforces",
+    "\\prj.lab",
+    "\\prj.lab\\dynarr",
+    "\\prj.lab\\stackarr"
+  ],
+  "SelectedNode": "\\pr.test\\test_stackarr.cpp",
+  "PreviewInSolutionExplorer": false
+}
