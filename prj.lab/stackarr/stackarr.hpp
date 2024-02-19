@@ -6,31 +6,31 @@
 #include <iostream>
 #include "complex/complex.hpp"
 
-class StackArr
-{
+class StackArr {
 public:
-	StackArr() = default;
-	StackArr(const StackArr& stackArray);
-	~StackArr();
-	
-	StackArr& operator=(const StackArr& rhs);
+	[[nodiscard]] StackArr() = default;
 
-	void Push(const Complex& newItem);
+	[[nodiscard]] StackArr(const StackArr&) = default;
+
+	~StackArr() = default;
+
+	[[nodiscard]] StackArr& operator=(const StackArr&) = default;
+
+	bool IsEmpty() const noexcept;
+
 	void Pop();
-	void Resize();
-	
-	bool IsEmpty();
 
-	std::ptrdiff_t Size() const noexcept;
-	
-	const Complex Top();
+	void Push(const Complex& val);
 
+	[[nodiscard]] Complex& Top();
+
+	[[nodiscard]] const Complex& Top() const;
+
+	void Clear() noexcept;
 
 private:
-	std::ptrdiff_t size = 0;
-	std::ptrdiff_t capacity = 0;
-	Complex* dataPtr = nullptr;
+	std::ptrdiff_t size_ = 0;
+	std::ptrdiff_t i_top_ = -1;
+	Complex* data_ = nullptr;
 };
-
-
 #endif // !STACKARR_STACKARR_HPP

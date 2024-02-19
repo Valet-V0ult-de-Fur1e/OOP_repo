@@ -500,11 +500,11 @@ build prj.lab\dynarr\install\local: phony prj.lab\dynarr\CMakeFiles\install\loca
 #############################################
 # Order-only phony target for stackarr
 
-build cmake_object_order_depends_target_stackarr: phony || prj.lab\stackarr\CMakeFiles\stackarr.dir
+build cmake_object_order_depends_target_stackarr: phony || cmake_object_order_depends_target_complex
 
 build prj.lab\stackarr\CMakeFiles\stackarr.dir\stackarr.cpp.obj: CXX_COMPILER__stackarr_unscanned_Debug C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\stackarr\stackarr.cpp || cmake_object_order_depends_target_stackarr
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
-  INCLUDES = -IC:\Users\EGOR\Desktop\misis\ооп\prj.lab\stackarr\..
+  INCLUDES = -IC:\Users\EGOR\Desktop\misis\ооп\prj.lab\stackarr\.. -IC:\Users\EGOR\Desktop\misis\ооп\prj.lab\complex\..
   OBJECT_DIR = prj.lab\stackarr\CMakeFiles\stackarr.dir
   OBJECT_FILE_DIR = prj.lab\stackarr\CMakeFiles\stackarr.dir
   TARGET_COMPILE_PDB = prj.lab\stackarr\CMakeFiles\stackarr.dir\stackarr.pdb
@@ -518,7 +518,7 @@ build prj.lab\stackarr\CMakeFiles\stackarr.dir\stackarr.cpp.obj: CXX_COMPILER__s
 #############################################
 # Link the static library prj.lab\stackarr\stackarr.lib
 
-build prj.lab\stackarr\stackarr.lib: CXX_STATIC_LIBRARY_LINKER__stackarr_Debug prj.lab\stackarr\CMakeFiles\stackarr.dir\stackarr.cpp.obj
+build prj.lab\stackarr\stackarr.lib: CXX_STATIC_LIBRARY_LINKER__stackarr_Debug prj.lab\stackarr\CMakeFiles\stackarr.dir\stackarr.cpp.obj || prj.lab\complex\complex.lib
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = prj.lab\stackarr\CMakeFiles\stackarr.dir
@@ -580,6 +580,192 @@ build prj.lab\stackarr\CMakeFiles\install\local.util: CUSTOM_COMMAND prj.lab\sta
   restat = 1
 
 build prj.lab\stackarr\install\local: phony prj.lab\stackarr\CMakeFiles\install\local.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# C:/Users/EGOR/Desktop/misis/ооп/prj.lab/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target stacklst
+
+
+#############################################
+# Order-only phony target for stacklst
+
+build cmake_object_order_depends_target_stacklst: phony || cmake_object_order_depends_target_complex
+
+build prj.lab\stacklst\CMakeFiles\stacklst.dir\stacklst.cpp.obj: CXX_COMPILER__stacklst_unscanned_Debug C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\stacklst\stacklst.cpp || cmake_object_order_depends_target_stacklst
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
+  INCLUDES = -IC:\Users\EGOR\Desktop\misis\ооп\prj.lab\stacklst\.. -IC:\Users\EGOR\Desktop\misis\ооп\prj.lab\complex\..
+  OBJECT_DIR = prj.lab\stacklst\CMakeFiles\stacklst.dir
+  OBJECT_FILE_DIR = prj.lab\stacklst\CMakeFiles\stacklst.dir
+  TARGET_COMPILE_PDB = prj.lab\stacklst\CMakeFiles\stacklst.dir\stacklst.pdb
+  TARGET_PDB = prj.lab\stacklst\stacklst.pdb
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target stacklst
+
+
+#############################################
+# Link the static library prj.lab\stacklst\stacklst.lib
+
+build prj.lab\stacklst\stacklst.lib: CXX_STATIC_LIBRARY_LINKER__stacklst_Debug prj.lab\stacklst\CMakeFiles\stacklst.dir\stacklst.cpp.obj || prj.lab\complex\complex.lib
+  LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd
+  LINK_FLAGS = /machine:x64
+  OBJECT_DIR = prj.lab\stacklst\CMakeFiles\stacklst.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = prj.lab\stacklst\CMakeFiles\stacklst.dir\stacklst.pdb
+  TARGET_FILE = prj.lab\stacklst\stacklst.lib
+  TARGET_PDB = prj.lab\stacklst\stacklst.pdb
+
+
+#############################################
+# Utility command for edit_cache
+
+build prj.lab\stacklst\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\EGOR\Desktop\misis\ооп\out\build\x64-Debug\prj.lab\stacklst && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build prj.lab\stacklst\edit_cache: phony prj.lab\stacklst\CMakeFiles\edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build prj.lab\stacklst\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\EGOR\Desktop\misis\ооп\out\build\x64-Debug\prj.lab\stacklst && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\EGOR\Desktop\misis\ооп -BC:\Users\EGOR\Desktop\misis\ооп\out\build\x64-Debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build prj.lab\stacklst\rebuild_cache: phony prj.lab\stacklst\CMakeFiles\rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build prj.lab\stacklst\list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build prj.lab\stacklst\CMakeFiles\install.util: CUSTOM_COMMAND prj.lab\stacklst\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\EGOR\Desktop\misis\ооп\out\build\x64-Debug\prj.lab\stacklst && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build prj.lab\stacklst\install: phony prj.lab\stacklst\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for install/local
+
+build prj.lab\stacklst\CMakeFiles\install\local.util: CUSTOM_COMMAND prj.lab\stacklst\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\EGOR\Desktop\misis\ооп\out\build\x64-Debug\prj.lab\stacklst && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build prj.lab\stacklst\install\local: phony prj.lab\stacklst\CMakeFiles\install\local.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# C:/Users/EGOR/Desktop/misis/ооп/prj.lab/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target queue
+
+
+#############################################
+# Order-only phony target for queue
+
+build cmake_object_order_depends_target_queue: phony || cmake_object_order_depends_target_complex
+
+build prj.lab\queue\CMakeFiles\queue.dir\queue.cpp.obj: CXX_COMPILER__queue_unscanned_Debug C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\queue\queue.cpp || cmake_object_order_depends_target_queue
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
+  INCLUDES = -IC:\Users\EGOR\Desktop\misis\ооп\prj.lab\queue\.. -IC:\Users\EGOR\Desktop\misis\ооп\prj.lab\complex\..
+  OBJECT_DIR = prj.lab\queue\CMakeFiles\queue.dir
+  OBJECT_FILE_DIR = prj.lab\queue\CMakeFiles\queue.dir
+  TARGET_COMPILE_PDB = prj.lab\queue\CMakeFiles\queue.dir\queue.pdb
+  TARGET_PDB = prj.lab\queue\queue.pdb
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target queue
+
+
+#############################################
+# Link the static library prj.lab\queue\queue.lib
+
+build prj.lab\queue\queue.lib: CXX_STATIC_LIBRARY_LINKER__queue_Debug prj.lab\queue\CMakeFiles\queue.dir\queue.cpp.obj || prj.lab\complex\complex.lib
+  LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd
+  LINK_FLAGS = /machine:x64
+  OBJECT_DIR = prj.lab\queue\CMakeFiles\queue.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = prj.lab\queue\CMakeFiles\queue.dir\queue.pdb
+  TARGET_FILE = prj.lab\queue\queue.lib
+  TARGET_PDB = prj.lab\queue\queue.pdb
+
+
+#############################################
+# Utility command for edit_cache
+
+build prj.lab\queue\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\EGOR\Desktop\misis\ооп\out\build\x64-Debug\prj.lab\queue && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build prj.lab\queue\edit_cache: phony prj.lab\queue\CMakeFiles\edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build prj.lab\queue\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\EGOR\Desktop\misis\ооп\out\build\x64-Debug\prj.lab\queue && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\EGOR\Desktop\misis\ооп -BC:\Users\EGOR\Desktop\misis\ооп\out\build\x64-Debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build prj.lab\queue\rebuild_cache: phony prj.lab\queue\CMakeFiles\rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build prj.lab\queue\list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build prj.lab\queue\CMakeFiles\install.util: CUSTOM_COMMAND prj.lab\queue\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\EGOR\Desktop\misis\ооп\out\build\x64-Debug\prj.lab\queue && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build prj.lab\queue\install: phony prj.lab\queue\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for install/local
+
+build prj.lab\queue\CMakeFiles\install\local.util: CUSTOM_COMMAND prj.lab\queue\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\EGOR\Desktop\misis\ооп\out\build\x64-Debug\prj.lab\queue && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build prj.lab\queue\install\local: phony prj.lab\queue\CMakeFiles\install\local.util
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
@@ -704,11 +890,11 @@ build pr.test\bin.dbg\test_dynarr.exe: CXX_EXECUTABLE_LINKER__test_dynarr_Debug 
 #############################################
 # Order-only phony target for test_stackarr
 
-build cmake_object_order_depends_target_test_stackarr: phony || cmake_object_order_depends_target_stackarr
+build cmake_object_order_depends_target_test_stackarr: phony || cmake_object_order_depends_target_complex cmake_object_order_depends_target_stackarr
 
 build pr.test\CMakeFiles\test_stackarr.dir\test_stackarr.cpp.obj: CXX_COMPILER__test_stackarr_unscanned_Debug C$:\Users\EGOR\Desktop\misis\ооп\pr.test\test_stackarr.cpp || cmake_object_order_depends_target_test_stackarr
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd
-  INCLUDES = -IC:\Users\EGOR\Desktop\misis\ооп\prj.lab\stackarr\..
+  INCLUDES = -IC:\Users\EGOR\Desktop\misis\ооп\prj.lab\stackarr\.. -IC:\Users\EGOR\Desktop\misis\ооп\prj.lab\complex\..
   OBJECT_DIR = pr.test\CMakeFiles\test_stackarr.dir
   OBJECT_FILE_DIR = pr.test\CMakeFiles\test_stackarr.dir
   TARGET_COMPILE_PDB = pr.test\CMakeFiles\test_stackarr.dir\
@@ -722,10 +908,10 @@ build pr.test\CMakeFiles\test_stackarr.dir\test_stackarr.cpp.obj: CXX_COMPILER__
 #############################################
 # Link the executable pr.test\bin.dbg\test_stackarr.exe
 
-build pr.test\bin.dbg\test_stackarr.exe: CXX_EXECUTABLE_LINKER__test_stackarr_Debug pr.test\CMakeFiles\test_stackarr.dir\test_stackarr.cpp.obj | prj.lab\stackarr\stackarr.lib || prj.lab\stackarr\stackarr.lib
+build pr.test\bin.dbg\test_stackarr.exe: CXX_EXECUTABLE_LINKER__test_stackarr_Debug pr.test\CMakeFiles\test_stackarr.dir\test_stackarr.cpp.obj | prj.lab\stackarr\stackarr.lib prj.lab\complex\complex.lib || prj.lab\complex\complex.lib prj.lab\stackarr\stackarr.lib
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
-  LINK_LIBRARIES = prj.lab\stackarr\stackarr.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  LINK_LIBRARIES = prj.lab\stackarr\stackarr.lib  prj.lab\complex\complex.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = pr.test\CMakeFiles\test_stackarr.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
@@ -733,6 +919,80 @@ build pr.test\bin.dbg\test_stackarr.exe: CXX_EXECUTABLE_LINKER__test_stackarr_De
   TARGET_FILE = pr.test\bin.dbg\test_stackarr.exe
   TARGET_IMPLIB = pr.test\test_stackarr.lib
   TARGET_PDB = pr.test\bin.dbg\test_stackarr.pdb
+
+# =============================================================================
+# Object build statements for EXECUTABLE target test_stacklst
+
+
+#############################################
+# Order-only phony target for test_stacklst
+
+build cmake_object_order_depends_target_test_stacklst: phony || cmake_object_order_depends_target_complex cmake_object_order_depends_target_stacklst
+
+build pr.test\CMakeFiles\test_stacklst.dir\test_stacklst.cpp.obj: CXX_COMPILER__test_stacklst_unscanned_Debug C$:\Users\EGOR\Desktop\misis\ооп\pr.test\test_stacklst.cpp || cmake_object_order_depends_target_test_stacklst
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd
+  INCLUDES = -IC:\Users\EGOR\Desktop\misis\ооп\prj.lab\stacklst\.. -IC:\Users\EGOR\Desktop\misis\ооп\prj.lab\complex\..
+  OBJECT_DIR = pr.test\CMakeFiles\test_stacklst.dir
+  OBJECT_FILE_DIR = pr.test\CMakeFiles\test_stacklst.dir
+  TARGET_COMPILE_PDB = pr.test\CMakeFiles\test_stacklst.dir\
+  TARGET_PDB = pr.test\bin.dbg\test_stacklst.pdb
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_stacklst
+
+
+#############################################
+# Link the executable pr.test\bin.dbg\test_stacklst.exe
+
+build pr.test\bin.dbg\test_stacklst.exe: CXX_EXECUTABLE_LINKER__test_stacklst_Debug pr.test\CMakeFiles\test_stacklst.dir\test_stacklst.cpp.obj | prj.lab\stacklst\stacklst.lib prj.lab\complex\complex.lib || prj.lab\complex\complex.lib prj.lab\stacklst\stacklst.lib
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd
+  LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
+  LINK_LIBRARIES = prj.lab\stacklst\stacklst.lib  prj.lab\complex\complex.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  OBJECT_DIR = pr.test\CMakeFiles\test_stacklst.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = pr.test\CMakeFiles\test_stacklst.dir\
+  TARGET_FILE = pr.test\bin.dbg\test_stacklst.exe
+  TARGET_IMPLIB = pr.test\test_stacklst.lib
+  TARGET_PDB = pr.test\bin.dbg\test_stacklst.pdb
+
+# =============================================================================
+# Object build statements for EXECUTABLE target test_queue
+
+
+#############################################
+# Order-only phony target for test_queue
+
+build cmake_object_order_depends_target_test_queue: phony || cmake_object_order_depends_target_complex cmake_object_order_depends_target_queue
+
+build pr.test\CMakeFiles\test_queue.dir\test_queue.cpp.obj: CXX_COMPILER__test_queue_unscanned_Debug C$:\Users\EGOR\Desktop\misis\ооп\pr.test\test_queue.cpp || cmake_object_order_depends_target_test_queue
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd
+  INCLUDES = -IC:\Users\EGOR\Desktop\misis\ооп\prj.lab\queue\.. -IC:\Users\EGOR\Desktop\misis\ооп\prj.lab\complex\..
+  OBJECT_DIR = pr.test\CMakeFiles\test_queue.dir
+  OBJECT_FILE_DIR = pr.test\CMakeFiles\test_queue.dir
+  TARGET_COMPILE_PDB = pr.test\CMakeFiles\test_queue.dir\
+  TARGET_PDB = pr.test\bin.dbg\test_queue.pdb
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_queue
+
+
+#############################################
+# Link the executable pr.test\bin.dbg\test_queue.exe
+
+build pr.test\bin.dbg\test_queue.exe: CXX_EXECUTABLE_LINKER__test_queue_Debug pr.test\CMakeFiles\test_queue.dir\test_queue.cpp.obj | prj.lab\queue\queue.lib prj.lab\complex\complex.lib || prj.lab\complex\complex.lib prj.lab\queue\queue.lib
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd
+  LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
+  LINK_LIBRARIES = prj.lab\queue\queue.lib  prj.lab\complex\complex.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  OBJECT_DIR = pr.test\CMakeFiles\test_queue.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = pr.test\CMakeFiles\test_queue.dir\
+  TARGET_FILE = pr.test\bin.dbg\test_queue.exe
+  TARGET_IMPLIB = pr.test\test_queue.lib
+  TARGET_PDB = pr.test\bin.dbg\test_queue.pdb
 
 
 #############################################
@@ -798,6 +1058,10 @@ build dynarr: phony prj.lab\dynarr\dynarr.lib
 
 build dynarr.lib: phony prj.lab\dynarr\dynarr.lib
 
+build queue: phony prj.lab\queue\queue.lib
+
+build queue.lib: phony prj.lab\queue\queue.lib
+
 build rational: phony prj.lab\rational\rational.lib
 
 build rational.lib: phony prj.lab\rational\rational.lib
@@ -805,6 +1069,10 @@ build rational.lib: phony prj.lab\rational\rational.lib
 build stackarr: phony prj.lab\stackarr\stackarr.lib
 
 build stackarr.lib: phony prj.lab\stackarr\stackarr.lib
+
+build stacklst: phony prj.lab\stacklst\stacklst.lib
+
+build stacklst.lib: phony prj.lab\stacklst\stacklst.lib
 
 build test_complex: phony pr.test\bin.dbg\test_complex.exe
 
@@ -814,6 +1082,10 @@ build test_dynarr: phony pr.test\bin.dbg\test_dynarr.exe
 
 build test_dynarr.exe: phony pr.test\bin.dbg\test_dynarr.exe
 
+build test_queue: phony pr.test\bin.dbg\test_queue.exe
+
+build test_queue.exe: phony pr.test\bin.dbg\test_queue.exe
+
 build test_rational: phony pr.test\bin.dbg\test_rational.exe
 
 build test_rational.exe: phony pr.test\bin.dbg\test_rational.exe
@@ -821,6 +1093,10 @@ build test_rational.exe: phony pr.test\bin.dbg\test_rational.exe
 build test_stackarr: phony pr.test\bin.dbg\test_stackarr.exe
 
 build test_stackarr.exe: phony pr.test\bin.dbg\test_stackarr.exe
+
+build test_stacklst: phony pr.test\bin.dbg\test_stacklst.exe
+
+build test_stacklst.exe: phony pr.test\bin.dbg\test_stacklst.exe
 
 # =============================================================================
 # Folder targets.
@@ -837,7 +1113,7 @@ build all: phony prj.codeforces\all prj.lab\all pr.test\all
 #############################################
 # Folder: C:/Users/EGOR/Desktop/misis/ооп/out/build/x64-Debug/pr.test
 
-build pr.test\all: phony pr.test\bin.dbg\test_complex.exe pr.test\bin.dbg\test_rational.exe pr.test\bin.dbg\test_dynarr.exe pr.test\bin.dbg\test_stackarr.exe
+build pr.test\all: phony pr.test\bin.dbg\test_complex.exe pr.test\bin.dbg\test_rational.exe pr.test\bin.dbg\test_dynarr.exe pr.test\bin.dbg\test_stackarr.exe pr.test\bin.dbg\test_stacklst.exe pr.test\bin.dbg\test_queue.exe
 
 # =============================================================================
 
@@ -851,7 +1127,7 @@ build prj.codeforces\all: phony
 #############################################
 # Folder: C:/Users/EGOR/Desktop/misis/ооп/out/build/x64-Debug/prj.lab
 
-build prj.lab\all: phony prj.lab\complex\all prj.lab\rational\all prj.lab\dynarr\all prj.lab\stackarr\all
+build prj.lab\all: phony prj.lab\complex\all prj.lab\rational\all prj.lab\dynarr\all prj.lab\stackarr\all prj.lab\stacklst\all prj.lab\queue\all
 
 # =============================================================================
 
@@ -870,6 +1146,13 @@ build prj.lab\dynarr\all: phony prj.lab\dynarr\dynarr.lib
 # =============================================================================
 
 #############################################
+# Folder: C:/Users/EGOR/Desktop/misis/ооп/out/build/x64-Debug/prj.lab/queue
+
+build prj.lab\queue\all: phony prj.lab\queue\queue.lib
+
+# =============================================================================
+
+#############################################
 # Folder: C:/Users/EGOR/Desktop/misis/ооп/out/build/x64-Debug/prj.lab/rational
 
 build prj.lab\rational\all: phony prj.lab\rational\rational.lib
@@ -882,20 +1165,27 @@ build prj.lab\rational\all: phony prj.lab\rational\rational.lib
 build prj.lab\stackarr\all: phony prj.lab\stackarr\stackarr.lib
 
 # =============================================================================
+
+#############################################
+# Folder: C:/Users/EGOR/Desktop/misis/ооп/out/build/x64-Debug/prj.lab/stacklst
+
+build prj.lab\stacklst\all: phony prj.lab\stacklst\stacklst.lib
+
+# =============================================================================
 # Built-in targets
 
 
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeRCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Compiler\MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Platform\Windows.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Platform\WindowsPaths.cmake C$:\Users\EGOR\Desktop\misis\ооп\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\pr.test\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.codeforces\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\complex\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\dynarr\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\rational\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\stackarr\CMakeLists.txt CMakeCache.txt CMakeFiles\3.26.4-msvc4\CMakeCCompiler.cmake CMakeFiles\3.26.4-msvc4\CMakeCXXCompiler.cmake CMakeFiles\3.26.4-msvc4\CMakeRCCompiler.cmake CMakeFiles\3.26.4-msvc4\CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeRCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Compiler\MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Platform\Windows.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Platform\WindowsPaths.cmake C$:\Users\EGOR\Desktop\misis\ооп\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\pr.test\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.codeforces\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\complex\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\dynarr\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\queue\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\rational\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\stackarr\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\stacklst\CMakeLists.txt CMakeCache.txt CMakeFiles\3.26.4-msvc4\CMakeCCompiler.cmake CMakeFiles\3.26.4-msvc4\CMakeCXXCompiler.cmake CMakeFiles\3.26.4-msvc4\CMakeRCCompiler.cmake CMakeFiles\3.26.4-msvc4\CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeRCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Compiler\MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Platform\Windows.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Platform\WindowsPaths.cmake C$:\Users\EGOR\Desktop\misis\ооп\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\pr.test\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.codeforces\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\complex\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\dynarr\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\rational\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\stackarr\CMakeLists.txt CMakeCache.txt CMakeFiles\3.26.4-msvc4\CMakeCCompiler.cmake CMakeFiles\3.26.4-msvc4\CMakeCXXCompiler.cmake CMakeFiles\3.26.4-msvc4\CMakeRCCompiler.cmake CMakeFiles\3.26.4-msvc4\CMakeSystem.cmake: phony
+build C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeCXXInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeGenericSystem.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeRCInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Compiler\MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Platform\Windows.cmake C$:\Program$ Files\Microsoft$ Visual$ Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.26\Modules\Platform\WindowsPaths.cmake C$:\Users\EGOR\Desktop\misis\ооп\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\pr.test\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.codeforces\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\complex\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\dynarr\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\queue\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\rational\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\stackarr\CMakeLists.txt C$:\Users\EGOR\Desktop\misis\ооп\prj.lab\stacklst\CMakeLists.txt CMakeCache.txt CMakeFiles\3.26.4-msvc4\CMakeCCompiler.cmake CMakeFiles\3.26.4-msvc4\CMakeCXXCompiler.cmake CMakeFiles\3.26.4-msvc4\CMakeRCCompiler.cmake CMakeFiles\3.26.4-msvc4\CMakeSystem.cmake: phony
 
 
 #############################################

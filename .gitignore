@@ -31,4 +31,15 @@
 *.out
 *.app
 
-*.py
+# MS Visual Studio Folders
+.vs
+.vscode
+out
+build
+
+# Build folders
+build
+build.*
+bin
+bin.*
+build.bat

@@ -52,3 +52,13 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("C:/Users/EGOR/Desktop/misis/ооп/out/build/x64-Debug/prj.lab/stackarr/cmake_install.cmake")
 endif()
 
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/Users/EGOR/Desktop/misis/ооп/out/build/x64-Debug/prj.lab/stacklst/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/Users/EGOR/Desktop/misis/ооп/out/build/x64-Debug/prj.lab/queue/cmake_install.cmake")
+endif()
+

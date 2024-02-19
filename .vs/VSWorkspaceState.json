@@ -10,9 +10,10 @@
     "\\pr.test",
     "\\prj.codeforces",
     "\\prj.lab",
-    "\\prj.lab\\dynarr",
-    "\\prj.lab\\stackarr"
+    "\\prj.lab\\complex",
+    "\\prj.lab\\stackarr",
+    "\\prj.lab\\stacklst"
   ],
-  "SelectedNode": "\\pr.test\\test_stackarr.cpp",
+  "SelectedNode": "\\prj.lab\\stacklst\\stacklst.cpp",
   "PreviewInSolutionExplorer": false
 }

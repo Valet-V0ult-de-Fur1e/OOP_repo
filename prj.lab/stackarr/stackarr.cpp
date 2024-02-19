@@ -1,59 +1,51 @@
-#include "stackarr.hpp"
-#include <stddef.h>
-#include "complex/complex.hpp"
+#include <complex/complex.hpp>
+#include <stackarr/stackarr.hpp>
 
-StackArr::StackArr(const StackArr& stackArr) {
-    std::copy(stackArr.dataPtr, stackArr.dataPtr, dataPtr);
-}
+#include <algorithm>
+#include <stdexcept>
 
-StackArr::~StackArr() {
-	delete[] dataPtr;
-}
-
-StackArr& StackArr::operator=(const StackArr& rhs) {
-    return *this;
-}
-
-void StackArr::Resize() {
-	if (capacity >= size) {
-		this->size = size;
-	}
-	else {
-		Complex* newDataPtr = new Complex[size * 2];
-		std::fill(newDataPtr, newDataPtr + size * 2, 0);
-		if (dataPtr != nullptr) {
-			std::copy(dataPtr, dataPtr + this->capacity, newDataPtr);
-		}
-		delete[] dataPtr;
-		dataPtr = newDataPtr;
-		this->capacity = size * 2;
-		this->size = size;
-	}
-}
-
-void StackArr::Push(const Complex& newItem){
-	if (size >= capacity) {
-		Resize();
-	}
-	size += 1;
-	dataPtr[size] = newItem;
+bool StackArr::IsEmpty() const noexcept {
+    return 0 > i_top_;
 }
 
 void StackArr::Pop() {
-	if (size == 0) {
-		throw std::runtime_error("Stack is empty");
-	}
-	size -= 1;
+    if (!IsEmpty()) {
+        i_top_ -= 1;
+    }
+    else {
+        throw std::logic_error("StackArr - try delete top form empty stack.");
+    }
 }
 
-bool StackArr::IsEmpty() {
-    return (size == 0) ? true : false;
+void StackArr::Push(const Complex& val) {
+    if (nullptr == data_) {
+        size_ = 8;
+        data_ = new Complex[size_];
+    }
+    else if (size_ == i_top_ + 1) {
+        auto buf = new Complex(size_ * 2);
+        std::copy(data_, data_ + size_, buf);
+        std::swap(data_, buf);
+        delete[] buf;
+        size_ *= 2;
+    }
+    data_[++i_top_] = val;
 }
 
-std::ptrdiff_t StackArr::Size() const noexcept {
-    return size;
+Complex& StackArr::Top() {
+    if (i_top_ < 0) {
+        throw std::logic_error("StackArr - try get top form empty stack.");
+    }
+    return data_[i_top_];
 }
 
-const Complex StackArr::Top(){
-    return dataPtr[size];
+const Complex& StackArr::Top() const {
+    if (i_top_ < 0) {
+        throw std::logic_error("StackArr - try get top form empty stack.");
+    }
+    return data_[i_top_];
+}
+
+void StackArr::Clear() noexcept {
+    i_top_ = -1;
 }
