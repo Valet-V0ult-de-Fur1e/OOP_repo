@@ -6,16 +6,16 @@
 #include <iostream>
 #include "complex/complex.hpp"
 
-class Queue
+class QueueLst
 {
 public:
-	Queue() = default;
+	QueueLst() = default;
 
-	Queue(const Queue&) = default;
+	QueueLst(const QueueLst&) = default;
 
-	~Queue() = default;
+	~QueueLst() = default;
 
-	[[nodiscard]] Queue& operator=(const Queue&) = default;
+	[[nodiscard]] QueueLst& operator=(const QueueLst&) = default;
 
 	bool IsEmpty() const noexcept;
 
