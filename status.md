@@ -1,4 +1,4 @@
-CHECK: 20240302-115149
+CHECK: 20240311-102322
 OK: file codeforces.id is correct
 OK: folder prj.codeforces structure is correct
 ERROR: file prj.test/CMakeLists.txt is absent
@@ -15,7 +15,9 @@ ERROR: lab stackarr - test build failed
 ERROR: lab stackarr_m - test build failed
 ERROR: lab stacklst - test build failed
 ERROR: lab stacklst_m - test build failed
-ERROR: lab queuelst - test build failed
-ERROR: lab queuelst_m - test build failed
 ERROR: lab queuearr - test build failed
 ERROR: lab queuearr_m - test build failed
+ERROR: lab queuelst - test build failed
+ERROR: lab queuelst_m - test build failed
+ERROR: lab queuelstpr - test build failed
+ERROR: lab queuelstpr_m - test build failed
