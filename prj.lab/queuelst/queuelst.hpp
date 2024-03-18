@@ -1,6 +1,6 @@
 #pragma once
-#ifndef QUEUE_QUEUE_HPP
-#define QUEUE_QUEUE_HPP
+#ifndef QUEUELST_QUEUELST_HPP
+#define QUEUELST_QUEUELST_HPP
 
 #include <cstddef>
 #include <iostream>
@@ -11,11 +11,11 @@ class QueueLst
 public:
 	QueueLst() = default;
 
-	QueueLst(const QueueLst&) = default;
+	QueueLst(QueueLst&& rhs) noexcept;
 
 	~QueueLst() = default;
 
-	[[nodiscard]] QueueLst& operator=(const QueueLst&) = default;
+	[[nodiscard]] QueueLst& operator=(QueueLst&& rhs);
 
 	bool IsEmpty() const noexcept;
 
@@ -44,4 +44,4 @@ private:
 	Node* tail_ = nullptr;
 };
 
-#endif // !QUEUE_QUEUE_HPP
+#endif // !QUEUELST_QUEUELST_HPP

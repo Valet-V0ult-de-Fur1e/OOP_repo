@@ -9,12 +9,14 @@
 struct Complex {
     [[nodiscard]] Complex() = default;
 
-    [[nodiscard]] Complex(const Complex&) = default;
+    [[nodiscard]] Complex(Complex&& rhs) noexcept;
+    Complex(const Complex&) = default;
 
     [[nodiscard]] explicit Complex(const double real) : re(real) { }
 
     [[nodiscard]] Complex(const double real, const double imaginary) : re(real), im(imaginary) {}
 
+    Complex& operator=(Complex&& rhs) noexcept;
     Complex& operator=(const Complex&) = default;
 
     ~Complex() = default;
@@ -63,8 +65,6 @@ struct Complex {
 [[nodiscard]] Complex operator/(const Complex& lhs, const Complex& rhs);
 [[nodiscard]] Complex operator/(const Complex& lhs, const double rhs);
 [[nodiscard]] Complex operator/(const double lhs, const Complex& rhs);
-
-[[nodiscard]] Complex pow(const Complex& lhs, const double rhs) noexcept;
 
 inline std::ostream& operator<<(std::ostream& ostrm, const Complex& rhs) noexcept {
     return rhs.WriteTo(ostrm);

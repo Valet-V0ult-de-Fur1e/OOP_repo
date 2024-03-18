@@ -2,6 +2,21 @@
 #include <queuelst/queuelst.hpp>
 #include <stdexcept>
 
+QueueLst::QueueLst(QueueLst&& rhs) noexcept: head_(rhs.head_), tail_(rhs.tail_)
+{
+    rhs.head_ = nullptr;
+    rhs.tail_ = nullptr;
+}
+
+QueueLst& QueueLst::operator=(QueueLst&& rhs)
+{
+    if (this != &rhs) {
+        std::swap(head_, rhs.head_);
+        std::swap(tail_, rhs.tail_);
+    }
+    return *this;
+}
+
 bool QueueLst::IsEmpty() const noexcept {
     return head_ == nullptr;
 }

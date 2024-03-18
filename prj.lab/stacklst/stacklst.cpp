@@ -3,6 +3,19 @@
 
 #include <stdexcept>
 
+StackLst::StackLst(StackLst&& rhs) noexcept: head_(rhs.head_)
+{
+    rhs.head_ = nullptr;
+}
+
+StackLst& StackLst::operator=(StackLst&& rhs)
+{
+    if (this != &rhs) {
+        std::swap(head_, rhs.head_);
+    }
+    return *this;
+}
+
 bool StackLst::IsEmpty() const noexcept {
     return head_ == nullptr;
 }

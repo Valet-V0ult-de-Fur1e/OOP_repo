@@ -12,11 +12,12 @@ public:
 	[[nodiscard]] StackLst() = default;
 
 	[[nodiscard]] StackLst(const StackLst&) = default;
+	[[nodiscard]] StackLst(StackLst&& rhs) noexcept;
 
 	~StackLst() = default;
 
 	[[nodiscard]] StackLst& operator=(const StackLst&) = default;
-
+	[[nodiscard]] StackLst& operator=(StackLst&& rhs);
 	bool IsEmpty() const noexcept;
 
 	void Pop() noexcept;

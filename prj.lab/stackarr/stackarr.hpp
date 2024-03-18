@@ -11,11 +11,12 @@ public:
 	[[nodiscard]] StackArr() = default;
 
 	[[nodiscard]] StackArr(const StackArr&) = default;
+	[[nodiscard]] StackArr(StackArr&& rhs) noexcept;
 
 	~StackArr() = default;
 
 	[[nodiscard]] StackArr& operator=(const StackArr&) = default;
-
+	[[nodiscard]] StackArr& operator=(StackArr&& rhs);
 	bool IsEmpty() const noexcept;
 
 	void Pop();

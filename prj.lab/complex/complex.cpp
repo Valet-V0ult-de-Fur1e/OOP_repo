@@ -1,5 +1,20 @@
 #include <complex/complex.hpp>
 
+Complex::Complex(Complex&& rhs) noexcept : im(rhs.im), re(rhs.re)
+{
+	rhs.im = 0;
+	rhs.re = 0;
+}
+
+Complex& Complex::operator=(Complex&& rhs) noexcept
+{
+	if (this != &rhs) {
+		std::swap(re, rhs.re);
+		std::swap(im, rhs.im);
+	}
+	return *this;
+}
+
 Complex Complex::operator-() const noexcept { return Complex(-re, -im); }
 
 bool Complex::operator==(const Complex& rhs) const noexcept {
@@ -67,16 +82,6 @@ std::istream& Complex::ReadFrom(std::istream& istrm) noexcept {
 		}
 	}
 	return istrm; 
-}
-
-Complex pow(const Complex& lhs, const double rhs) {
-	Complex product(lhs);
-	double hypotenuse = pow((pow(lhs.re, 2) + pow(lhs.im, 2)), 0.5);
-	double corner = abs(acos(lhs.im / pow(hypotenuse, 0.5)));
-	hypotenuse = pow(hypotenuse, rhs);
-	product.re = hypotenuse * cos(rhs * corner);
-	product.im = hypotenuse * sin(rhs * corner);
-	return product;
 }
 
 Complex operator+(const Complex& lhs, const Complex& rhs) noexcept { return Complex(lhs) += rhs; }

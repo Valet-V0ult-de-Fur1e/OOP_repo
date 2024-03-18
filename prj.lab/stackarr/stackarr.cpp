@@ -8,6 +8,21 @@ bool StackArr::IsEmpty() const noexcept {
     return 0 > i_top_;
 }
 
+StackArr::StackArr(StackArr&& rhs) noexcept : size_(rhs.size_), i_top_(rhs.i_top_), data_(rhs.data_) {
+    rhs.size_ = 0;
+    rhs.i_top_ = -1;
+    rhs.data_ = nullptr;
+}
+
+StackArr& StackArr::operator=(StackArr&& rhs) {
+    if (this != &rhs) {
+        std::swap(size_, rhs.size_);
+        std::swap(i_top_, rhs.i_top_);
+        std::swap(data_, rhs.data_);
+    }
+    return *this;
+}
+
 void StackArr::Pop() {
     if (!IsEmpty()) {
         i_top_ -= 1;

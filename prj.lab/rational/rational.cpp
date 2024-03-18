@@ -3,6 +3,19 @@
 #include <cmath>
 #include <exception>
 
+Rational::Rational(Rational&& rhs) noexcept : numerator(rhs.numerator), denominator(rhs.denominator){
+    rhs.numerator = 0;
+    rhs.denominator = 1;
+}
+
+Rational& Rational::operator=(Rational&& rhs) {
+    if (this != &rhs) {
+        std::swap(numerator, rhs.numerator);
+        std::swap(denominator, rhs.denominator);
+    }
+    return *this;
+}
+
 Rational::Rational(int64_t number) noexcept {
     numerator = number;
 }

@@ -8,10 +8,11 @@ class Rational {
 public:
 	Rational() = default;
 	Rational(const Rational&) = default;
+	Rational(Rational&& rhs) noexcept;
 	explicit Rational(const std::int64_t num) noexcept;
 	Rational(const std::int64_t num, const std::int64_t den);
 	~Rational() = default;
-	Rational& operator=(const Rational&) = default;
+	Rational& operator=(Rational&& rhs);
 
 	std::int64_t num() const noexcept;
 	std::int64_t den() const noexcept;
