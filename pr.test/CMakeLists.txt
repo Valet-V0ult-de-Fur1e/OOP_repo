@@ -16,4 +16,7 @@ target_link_libraries(test_stacklst stacklst)
 add_executable(test_queuelst test_queuelst.cpp)
 target_link_libraries(test_queuelst queuelst)
 
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT test_queuelst)
+add_executable(test_bitset test_bitset.cpp)
+target_link_libraries(test_bitset bitset)
+
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT test_bitset)
