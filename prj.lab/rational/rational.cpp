@@ -22,7 +22,7 @@ Rational::Rational(int64_t number) noexcept {
 
 Rational::Rational(int64_t numerator, int64_t denominator) {
     if (denominator == 0) {
-        throw std::invalid_argument("null in denominator");
+        throw std::invalid_argument("Zero denumenator in Rational ctor");
     }
     else {
         this->denominator = denominator;
@@ -249,4 +249,35 @@ int64_t Rational::num() const noexcept {
 
 int64_t Rational::den() const noexcept {
     return denominator;
+}
+
+std::ostream& Rational::WriteTo(std::ostream& ostrm) const noexcept {
+  ostrm << numerator << separator << denominator;
+  return ostrm;
+}
+
+std::istream& Rational::ReadFrom(std::istream& istrm) noexcept {
+  int64_t num = 0;
+  int64_t den = 0;
+  char sep = 0;
+  istrm >> num >> sep >> den;
+  if (istrm.good()) {
+    if (sep == separator && den != 0) {
+      numerator = num;
+      denominator = den;
+    }
+    else {
+      istrm.setstate(std::ios_base::failbit);
+    }
+    Reduce();
+  }
+  return istrm;
+}
+
+std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs) noexcept {
+  return rhs.WriteTo(ostrm);
+}
+
+std::istream& operator>>(std::istream& istrm, Rational& rhs) noexcept {
+  return rhs.ReadFrom(istrm);
 }

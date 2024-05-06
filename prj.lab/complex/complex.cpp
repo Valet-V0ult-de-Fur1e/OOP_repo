@@ -59,6 +59,7 @@ Complex& Complex::operator/=(const Complex& rhs) {
 	im = (re * rhs.im - im * rhs.re) / (rhs.re * rhs.re + rhs.im * rhs.im);
 	return *this; 
 }
+
 Complex& Complex::operator/=(const double rhs) { return operator/=(Complex(rhs)); }
 
 std::ostream& Complex::WriteTo(std::ostream& ostrm) const noexcept { 

@@ -1,27 +1,62 @@
-#include<stackarr/stackarr.hpp>
+#pragma once
+#ifndef STACKARRT_STACKARRT_HPP
+#define STACKARRT_STACKARRT_HPP
 
 #include<cstddef>
+#include<memory>
 #include<algorithm>
 #include<stdexcept>
 
-bool StackArr::IsEmpty() const noexcept {
+template<class T>
+class StackArrT
+{
+public:
+  StackArrT() = default;
+  StackArrT(const StackArrT& stackarr);
+  StackArrT(StackArrT&& stack) noexcept;
+  
+  ~StackArrT() = default;
+
+  StackArrT& operator=(const StackArrT& stackarr);
+  StackArrT& operator=(StackArrT&& stack) noexcept;
+
+  void Push(const T& cell);
+  void Pop() noexcept;
+  void Clear() noexcept;
+
+  bool IsEmpty() const noexcept;
+  T& Top() const;
+  ptrdiff_t Size() const noexcept;
+  ptrdiff_t Capacity() const noexcept;
+
+private:
+  ptrdiff_t size_ = 0;
+  ptrdiff_t capacity_ = 0;
+  std::unique_ptr<T[]> data_ = nullptr;
+};
+
+template<class T>
+bool StackArrT<T>::IsEmpty() const noexcept {
   return (size_ == 0);
 }
 
-StackArr::StackArr(const StackArr& stackarr) {
+template<class T>
+StackArrT<T>::StackArrT(const StackArrT<T>& stackarr) {
     size_ = stackarr.size_;
     capacity_ = stackarr.capacity_;
     data_ = std::make_unique<Complex[]>(capacity_);
     std::copy(stackarr.data_.get(), stackarr.data_.get() + size_, data_.get());
 }
 
-StackArr::StackArr(StackArr&& array) noexcept {
+template<class T>
+StackArrT<T>::StackArrT(StackArrT<T>&& array) noexcept {
     std::swap(data_, array.data_);
     size_ = array.size_;
     capacity_ = array.capacity_;
 }
 
-StackArr& StackArr::operator=(const StackArr& stackarr) {
+template<class T>
+StackArrT<T>& StackArrT<T>::operator=(const StackArrT& stackarr) {
     if (data_ == stackarr.data_) {
         return *this;
     }
@@ -40,7 +75,8 @@ StackArr& StackArr::operator=(const StackArr& stackarr) {
     }
 }
 
-StackArr& StackArr::operator=(StackArr&& array) noexcept {
+template<class T>
+StackArrT<T>& StackArrT<T>::operator=(StackArrT&& array) noexcept {
     if (this != &array) {
         std::swap(data_, array.data_);
         size_ = array.size_;
@@ -50,7 +86,8 @@ StackArr& StackArr::operator=(StackArr&& array) noexcept {
     return *this;
 }
 
-void StackArr::Pop() {
+template<class T>
+void StackArrT<T>::Pop() {
     if (!IsEmpty()) {
         size_ -= 1;
     }
@@ -59,7 +96,8 @@ void StackArr::Pop() {
     }
 }
 
-void StackArr::Push(const Complex& cell) {
+template<class T>
+void StackArrT<T>::Push(const T& cell) {
     if (size_ >= capacity_) {
         if (capacity_ == 0) {
         capacity_ = 1;
@@ -67,7 +105,7 @@ void StackArr::Push(const Complex& cell) {
         else {
         capacity_ *= 2;
         }
-        std::unique_ptr<Complex[]> ptr_temp = std::make_unique<Complex[]>(capacity_);
+        std::unique_ptr<T[]> ptr_temp = std::make_unique<T[]>(capacity_);
         std::copy(data_.get(), data_.get() + size_, ptr_temp.get());
         std::swap(data_, ptr_temp);
         *(data_.get() + size_) = cell;
@@ -78,17 +116,22 @@ void StackArr::Push(const Complex& cell) {
     ++size_;
 }
 
-Complex& StackArr::Top() const{
+template<class T>
+T& StackArrT<T>::Top() const{
     if (IsEmpty()) {
         throw std::logic_error("StackArr - try get top form empty stack.");
     }
     return *(data_.get() + size_ - 1);
 }
 
-void StackArr::Clear() noexcept {
+template<class T>
+void StackArrT<T>::Clear() noexcept {
     size_ = 0;
 }
 
-ptrdiff_t StackArr::Capacity() const noexcept {
+template<class T>
+ptrdiff_t StackArrT<T>::Capacity() const noexcept {
     return capacity_;
 }
+
+#endif // !STACKARRT_STACKARRT_HPP

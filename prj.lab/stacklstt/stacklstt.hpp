@@ -1,21 +1,67 @@
-#include <complex/complex.hpp>
-#include <stacklst/stacklst.hpp>
+#pragma once
+#ifndef STACKLST_STACKLST_HPP
+#define STACKLST_STACKLST_HPP
 
+#include <cstddef>
+#include <iostream>
 #include <stdexcept>
 
-StackLst::StackLst(const StackLst& stack) {
+template <class T>
+class StackLstT
+{
+public:
+	StackLstT() = default;
+	StackLstT(const StackLstT& stack);
+	StackLstT(StackLstT&& stack) noexcept;
+
+	~StackLstT();
+
+	StackLstT& operator=(const StackLstT& stack);
+	StackLstT& operator=(StackLstT&& stack) noexcept;
+
+	void Push(const T& data);
+	void Pop() noexcept;
+	void Clear() noexcept;
+
+	T& Top() const;
+	bool IsEmpty() const noexcept;
+
+private:
+	struct Node
+	{
+		T data_ = T(0);
+		Node* next_ = nullptr;
+
+		Node() = default;
+		
+		Node(const T& data) {
+		data_ = data;
+		next_ = nullptr;
+		}
+	};
+
+	Node* top_ = nullptr;
+
+	void CopyStack(const StackLstT& stack);
+};
+
+template <class T>
+StackLstT<T>::StackLstT(const StackLstT<T>& stack) {
   CopyStack(stack);
 }
 
-StackLst::StackLst(StackLst&& stack) noexcept {
+template <class T>
+StackLstT<T>::StackLstT(StackLstT<T>&& stack) noexcept {
   std::swap(top_, stack.top_);
 }
 
-StackLst::~StackLst() {
+template <class T>
+StackLstT<T>::~StackLstT() {
   Clear();
 }
 
-StackLst& StackLst::operator=(const StackLst& stack) {
+template <class T>
+StackLstT<T>& StackLstT<T>::operator=(const StackLstT<T>& stack) {
   if (top_ == stack.top_) {
     return *(this);
   }
@@ -56,19 +102,22 @@ StackLst& StackLst::operator=(const StackLst& stack) {
   }
 }
 
-StackLst& StackLst::operator=(StackLst&& stack) noexcept {
+template <class T>
+StackLstT<T>& StackLstT<T>::operator=(StackLstT<T>&& stack) noexcept {
   std::swap(top_, stack.top_);
 
   return *this;
 }
 
-void StackLst::Push(const Complex& data) {
+template <class T>
+void StackLstT<T>::Push(const T& data) {
   Node* temp = new Node(data);
   temp->next_ = top_;
   top_ = temp;
 }
 
-void StackLst::Pop() noexcept {
+template <class T>
+void StackLstT<T>::Pop() noexcept {
     if (!IsEmpty()) {
         Node* temp = top_;
         top_ = temp->next_;
@@ -79,14 +128,16 @@ void StackLst::Pop() noexcept {
     }
 }
 
-void StackLst::Clear() noexcept {
+template <class T>
+void StackLstT<T>::Clear() noexcept {
     while (!IsEmpty())
     {
         Pop();
     }
 }
 
-Complex& StackLst::Top() const {
+template <class T>
+T& StackLstT<T>::Top() const {
   if (IsEmpty()) {
     throw std::logic_error("StackLst - try get top form empty stack.");
   }
@@ -95,11 +146,13 @@ Complex& StackLst::Top() const {
   }
 }
 
-bool StackLst::IsEmpty() const noexcept {
+template <class T>
+bool StackLstT<T>::IsEmpty() const noexcept {
   return (top_ == nullptr);
 }
 
-void StackLst::CopyStack(const StackLst& stack) {
+template <class T>
+void StackLstT<T>::CopyStack(const StackLstT<T>& stack) {
   if (!stack.IsEmpty()) {
     top_ = new Node(stack.top_->data_);
     Node* temp_parent = stack.top_->next_;
@@ -114,3 +167,5 @@ void StackLst::CopyStack(const StackLst& stack) {
     top_ = nullptr;
   }
 }
+
+#endif // !STACKLST_STACKLST_HPP

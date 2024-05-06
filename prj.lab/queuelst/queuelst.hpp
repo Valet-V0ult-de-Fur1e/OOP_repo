@@ -10,38 +10,41 @@ class QueueLst
 {
 public:
 	QueueLst() = default;
+	QueueLst(const QueueLst& queue);
+	QueueLst(QueueLst&& queue) noexcept;
 
-	QueueLst(QueueLst&& rhs) noexcept;
+	~QueueLst();
 
-	~QueueLst() = default;
+	QueueLst& operator=(const QueueLst& queue);
+	QueueLst& operator=(QueueLst&& queue) noexcept;
 
-	[[nodiscard]] QueueLst& operator=(QueueLst&& rhs);
+	void Push(const Complex& data);
+	void Pop() noexcept;
+	void Clear() noexcept;
 
+	Complex& Back();
+	const Complex& Back() const;
+
+	Complex& Top();
+	const Complex& Top() const;
+	
 	bool IsEmpty() const noexcept;
 
-	void Pop() noexcept;
-
-	void Push(const Complex& val);
-
-	[[nodiscard]] Complex& Front();
-
-	[[nodiscard]] const Complex& Front() const;
-
-	[[nodiscard]] Complex& Back();
-
-	[[nodiscard]] const Complex& Back() const;
-
-	void Clear() noexcept;
 private:
+	struct Node
+	{
+		Complex data_ = Complex(0);
+		Node* next_ = nullptr;
 
-	struct Node {
-		Node(Complex const val_, Node* const next_) : val(val_), next(next_) {};
-		Complex val;
-		Node* next = nullptr;
+		Node() = default;
+		Node(const Complex& data) : data_(data), next_(nullptr) {}
 	};
 
 	Node* head_ = nullptr;
 	Node* tail_ = nullptr;
+
+	void CopyQueue(const QueueLst& queue);
 };
+
 
 #endif // !QUEUELST_QUEUELST_HPP

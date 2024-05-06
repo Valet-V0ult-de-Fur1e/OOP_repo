@@ -9,35 +9,39 @@
 class StackLst
 {
 public:
-	[[nodiscard]] StackLst() = default;
+  StackLst() = default;
+  StackLst(const StackLst& stack);
+  StackLst(StackLst&& stack) noexcept;
 
-	[[nodiscard]] StackLst(const StackLst&) = default;
-	[[nodiscard]] StackLst(StackLst&& rhs) noexcept;
+  ~StackLst();
 
-	~StackLst() = default;
+  StackLst& operator=(const StackLst& stack);
+  StackLst& operator=(StackLst&& stack) noexcept;
 
-	[[nodiscard]] StackLst& operator=(const StackLst&) = default;
-	[[nodiscard]] StackLst& operator=(StackLst&& rhs);
-	bool IsEmpty() const noexcept;
+  void Push(const Complex& data);
+  void Pop() noexcept;
+  void Clear() noexcept;
 
-	void Pop() noexcept;
+  Complex& Top() const;
+  bool IsEmpty() const noexcept;
 
-	void Push(const Complex& val);
-
-	[[nodiscard]] Complex& Top();
-
-	[[nodiscard]] const Complex& Top() const;
-
-	void Clear() noexcept;
 private:
+  struct Node
+  {
+    Complex data_ = Complex(0);
+    Node* next_ = nullptr;
 
-	struct Node {
-		Node(Complex const val_, Node* const next_) : val(val_), next(next_) {};
-		Complex val;
-		Node* next = nullptr;
-	};
+    Node() = default;
+    
+    Node(const Complex& data) {
+      data_ = data;
+      next_ = nullptr;
+    }
+  };
 
-	Node* head_ = nullptr;
+  Node* top_ = nullptr;
+
+  void CopyStack(const StackLst& stack);
 };
 
 #endif // !STACKLST_STACKLST_HPP
