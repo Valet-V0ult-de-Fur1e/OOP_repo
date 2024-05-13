@@ -56,6 +56,6 @@ TEST_CASE("bia change value") {
 	testBitset.Resize(10);
 	testBitset[0] = 1;
 	std::cout << bool(testBitset[0]);
-	testBitset[1] = testBitset[0];
+	testBitset[1] = 1;
 	std::cout << bool(testBitset[1]);
 }

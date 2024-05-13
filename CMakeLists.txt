@@ -13,4 +13,5 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO bin.relwithdbg)
 
 add_subdirectory(prj.codeforces)
 add_subdirectory(prj.lab)
-add_subdirectory(pr.test)
+add_subdirectory(prj.test)
+add_subdirectory(prj.app)
