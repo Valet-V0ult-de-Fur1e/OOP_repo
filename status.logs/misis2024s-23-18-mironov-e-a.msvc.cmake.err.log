@@ -1,6 +1,15 @@
-CMake Warning:
-  Manually-specified variables were not used by the project:
+CMake Error at D:/programs/vcpkg/scripts/buildsystems/vcpkg.cmake:639 (_add_library):
+  Cannot find source file:
 
-    BUILD_WITH_SAMPLES
+    queuelstpr.hpp
+Call Stack (most recent call first):
+  prj.lab/queuelstpr/CMakeLists.txt:1 (add_library)
 
 
+CMake Error at D:/programs/vcpkg/scripts/buildsystems/vcpkg.cmake:639 (_add_library):
+  No SOURCES given to target: queuelstpr
+Call Stack (most recent call first):
+  prj.lab/queuelstpr/CMakeLists.txt:1 (add_library)
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.
