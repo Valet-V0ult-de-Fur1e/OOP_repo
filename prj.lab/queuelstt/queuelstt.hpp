@@ -2,206 +2,219 @@
 #ifndef QUEUELSTT_QUEUELSTT_HPP
 #define QUEUELSTT_QUEUELSTT_HPP
 
-#include <cstddef>
-#include <iostream>
 #include <stdexcept>
+#include <initializer_list>
 
 template<class T>
-class QueueLstT
-{
+class QueueLstT {
 public:
-	QueueLstT() = default;
-	QueueLstT(const QueueLstT& queue);
-	QueueLstT(QueueLstT&& queue) noexcept;
+    [[nodiscard]] QueueLstT() = default;
+    [[nodiscard]] QueueLstT(const QueueLstT& copy_queuelst);
+    [[nodiscard]] QueueLstT(QueueLstT&& copy_queuelst);
+    [[nodiscard]] QueueLstT(const std::initializer_list<T>& init_list);
+    QueueLstT& operator=(const QueueLstT& copy_queuelst) noexcept;
+    QueueLstT& operator=(QueueLstT&& copy_queuelst) noexcept;
+    ~QueueLstT();
 
-	~QueueLstT();
-
-	QueueLstT& operator=(const QueueLstT& queue);
-	QueueLstT& operator=(QueueLstT&& queue) noexcept;
-
-	void Push(const T& data);
-	void Pop() noexcept;
-	void Clear() noexcept;
-
-	T& Back();
-	const T& Back() const;
-
-	T& Top();
-	const T& Top() const;
-	
-	bool IsEmpty() const noexcept;
+    [[nodiscard]] bool IsEmpty() const noexcept;
+    [[nodiscard]] T& Top()&;
+    [[nodiscard]] const T& Top() const&;
+    void Pop() noexcept;
+    void Push(const T& n_elem);
+    void Clear() noexcept;
 
 private:
-	struct Node
-	{
-		T data_ = T(0);
-		Node* next_ = nullptr;
+    struct Node {
+        Node(const T& n_value);
+        T value;
+        Node* next_node = nullptr;
+    };
 
-		Node() = default;
-		Node(const T& data) : data_(data), next_(nullptr) {}
-	};
-
-	Node* head_ = nullptr;
-	Node* tail_ = nullptr;
-
-	void CopyQueue(const QueueLstT& queue);
+    Node* head_ = nullptr;
+    Node* tail_ = nullptr;
 };
 
-template<class T>
-QueueLstT<T>::QueueLstT(const QueueLstT<T>& queue) {
-  CopyQueue(queue);
-}
 
 template<class T>
-QueueLstT<T>::QueueLstT(QueueLstT&& queue) noexcept {
-  std::swap(head_, queue.head_);
-  tail_ = queue.tail_;
-}
-
-template<class T>
-QueueLstT<T>::~QueueLstT() {
-  Clear();
-}
-
-template<class T>
-QueueLstT<T>& QueueLstT<T>::operator=(const QueueLstT<T>& queue) {
-  if (head_ == queue.head_) {
-    return *(this);
-  }
-  else {
-    if (queue.IsEmpty()) {
-      Clear();
+[[nodiscard]] QueueLstT<T>::QueueLstT(const QueueLstT& copy_queuelst) {
+    Node* copy_head = copy_queuelst.head_;
+    while (copy_head != nullptr) {
+        Push(copy_head->value);
+        copy_head = copy_head->next_node;
     }
-    else if (IsEmpty()) {
-      CopyQueue(queue);
+    return;
+}
+
+template<class T>
+[[nodiscard]] QueueLstT<T>::QueueLstT(QueueLstT&& copy_queuelst)
+    : head_{ copy_queuelst.head_ },
+    tail_{ copy_queuelst.tail_ } {
+    copy_queuelst.head_ = nullptr;
+    copy_queuelst.tail_ = nullptr;
+}
+
+template<class T>
+[[nodiscard]] QueueLstT<T>::QueueLstT(const std::initializer_list<T>& init_list) {
+    for (T i : init_list) {
+        Push(i);
     }
-    else {
-      head_->data_ = queue.head_->data_;
-      Node* parent = queue.head_;
-      Node* child = head_;
-      while ((parent->next_ != nullptr) && (child->next_ != nullptr)) {
-        child->data_ = parent->data_;
-        child = child->next_;
-        parent = parent->next_;
-      }
-      child->data_ = parent->data_;
-      if ((parent->next_ != nullptr) && (child->next_ == nullptr)) {
-        while (parent->next_ != nullptr) {
-          child->next_ = new Node(parent->next_->data_);
-          child = child->next_;
-          parent = parent->next_;
+    return;
+}
+
+template<class T>
+QueueLstT<T>& QueueLstT<T>::operator=(const QueueLstT& copy_queuelst) noexcept {
+    if (this == &copy_queuelst) {
+        return *this;
+    }
+
+    Node* our_elem = head_;
+    Node* our_elem_prev = nullptr;
+    tail_ = nullptr;
+    Node* their_elem = copy_queuelst.head_;
+
+    while (our_elem != nullptr && their_elem != nullptr) {
+        our_elem->value = their_elem->value;
+
+        our_elem_prev = our_elem;
+        our_elem = our_elem->next_node;
+
+        their_elem = their_elem->next_node;
+    }
+
+    if (our_elem != nullptr && their_elem == nullptr) {
+        if (our_elem_prev != nullptr) {
+            our_elem_prev->next_node = nullptr;
+            tail_ = our_elem_prev;
         }
-      }
-      tail_ = child;
-      if ((parent->next_ == nullptr) && (child->next_ != nullptr)) {
-        Node* temp = child->next_;
-        child->next_ = nullptr;
-        while (child != nullptr) {
-          child = temp->next_;
-          delete temp;
-          temp = child;
-        }
-      }
-    }
-    return *(this);
-  }
-}
 
-template<class T>
-QueueLstT<T>& QueueLstT<T>::operator=(QueueLstT<T>&& rhs) noexcept
-{
-    if (this != &rhs) {
-        std::swap(head_, rhs.head_);
-        std::swap(tail_, rhs.tail_);
+        Node* to_delete = nullptr;
+        while (our_elem != nullptr) {
+            to_delete = our_elem;
+            our_elem = our_elem->next_node;
+            delete to_delete;
+        }
+
+        if (our_elem_prev == nullptr) {
+            head_ = tail_ = nullptr;
+        }
     }
+
+    if (our_elem == nullptr && their_elem != nullptr) {
+        if (our_elem_prev == nullptr) {
+            head_ = new Node(their_elem->value);
+            our_elem_prev = head_;
+            their_elem = their_elem->next_node;
+        }
+        while (their_elem != nullptr) {
+            Node* our_elem_new = new Node(their_elem->value);
+            our_elem_prev->next_node = our_elem_new;
+            our_elem_prev = our_elem_new;
+            their_elem = their_elem->next_node;
+        }
+
+        tail_ = our_elem_prev;
+        our_elem_prev->next_node = nullptr;
+    }
+
     return *this;
 }
 
 template<class T>
-bool QueueLstT<T>::IsEmpty() const noexcept {
+QueueLstT<T>& QueueLstT<T>::operator=(QueueLstT&& copy_queuelst) noexcept {
+    if (this == &copy_queuelst) {
+        return *this;
+    }
+
+    std::swap(head_, copy_queuelst.head_);
+    std::swap(tail_, copy_queuelst.tail_);
+    return *this;
+}
+
+template<class T>
+QueueLstT<T>::~QueueLstT() {
+    if (head_ == nullptr) {
+        return;
+    }
+
+    Node* to_delete = nullptr;
+    while (head_ != nullptr) {
+        to_delete = head_;
+        head_ = head_->next_node;
+        delete to_delete;
+    }
+
+    to_delete = nullptr;
+    head_ = nullptr;
+    return;
+}
+
+template<class T>
+[[nodiscard]] bool QueueLstT<T>::IsEmpty() const noexcept {
     return head_ == nullptr;
 }
 
 template<class T>
+[[nodiscard]] T& QueueLstT<T>::Top()& {
+    if (IsEmpty()) {
+        throw std::runtime_error("something bad happened");
+    }
+    return head_->value;
+}
+
+template<class T>
+[[nodiscard]] const T& QueueLstT<T>::Top() const& {
+    if (IsEmpty()) {
+        throw std::runtime_error("something bad happened");
+    }
+    return head_->value;
+}
+
+template<class T>
 void QueueLstT<T>::Pop() noexcept {
-    if (!IsEmpty()) {
-        Node* deleted = head_;
-        head_ = head_->next_;
-        delete deleted;
-    }
-    else {
-        throw std::logic_error("QueueLst - try delete top form empty queue.");
-    }
-}
-
-template<class T>
-void QueueLstT<T>::Push(const T& data) {
-  if (IsEmpty()) {
-    tail_ = new Node(data);
-    head_ = tail_;
-  }
-  else {
-    tail_->next_ = new Node(data);
-    tail_ = tail_->next_;
-  }
-}
-
-template<class T>
-const T& QueueLstT<T>::Back() const {
     if (IsEmpty()) {
-        throw std::logic_error("QueueLst - try get back form empty queue.");
+        return;
     }
-    return (tail_->data_);
+
+    Node* to_delete = head_;
+    head_ = head_->next_node;
+    if (head_ == nullptr) {
+        tail_ = nullptr;
+    }
+
+    delete to_delete;
+    return;
 }
 
 template<class T>
-T& QueueLstT<T>::Back() {
-    if (IsEmpty()) {
-        throw std::logic_error("QueueLst - try get back form empty queue.");
-    }
-    return tail_->data_;
-}
+void QueueLstT<T>::Push(const T& n_elem) {
+    Node* new_node = new Node(n_elem);
 
-template<class T>
-const T& QueueLstT<T>::Top() const {
-    if (IsEmpty()) {
-        throw std::logic_error("QueueLst - try get front form empty queue.");
+    if (tail_ != nullptr) {
+        tail_->next_node = new_node;
     }
-    return (head_->data_);
-}
+    tail_ = new_node;
 
-template<class T>
-T& QueueLstT<T>::Top() {
-    if (IsEmpty()) {
-        throw std::logic_error("QueueLst - try get top front empty queue.");
+    if (head_ == nullptr) {
+        head_ = tail_;
     }
-    return head_->data_;
+    return;
 }
 
 template<class T>
 void QueueLstT<T>::Clear() noexcept {
-    while (!IsEmpty())
-    {
-        Pop();
+    Node* to_delete = nullptr;
+    while (head_ != nullptr) {
+        to_delete = head_;
+        head_ = head_->next_node;
+        delete to_delete;
     }
+    return;
 }
 
 template<class T>
-void QueueLstT<T>::CopyQueue(const QueueLstT<T>& queue) {
-  if (!queue.IsEmpty()) {
-    head_ = new Node(queue.head_->data_);
-    tail_ = head_;
-    Node* temp = queue.head_->next_;
-    while (temp != nullptr) {
-      tail_->next_ = new Node(temp->data_);
-      tail_ = tail_->next_;
-      temp = temp->next_;
-    }
-  }
-  else {
-    head_ = nullptr;
-    tail_ = nullptr;
-  }
-}
+QueueLstT<T>::Node::Node(const T& n_value) :
+    value{ n_value }, next_node{ nullptr } {}
+
+
 
 #endif // !QUEUELSTT_QUEUELSTT_HPP

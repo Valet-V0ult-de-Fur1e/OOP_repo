@@ -2,80 +2,80 @@
 #ifndef BITSET_BITSET_HPP
 #define BITSET_BITSET_HPP
 
-#include <cstddef>
-#include <iostream>
 #include <vector>
+#include <initializer_list>
+#include <algorithm>
+#include <stdexcept>
+#include <cstdint>
+#include <cstddef>
+#include <istream>
+#include <ostream>
+
 
 class BitSet {
 public:
-	class BitAccessor {
-	public:
-		BitAccessor() = delete;
-		BitAccessor(BitSet& bst, const std::int32_t idx) noexcept : bst_(bst), idx_(idx) {}
-		~BitAccessor() = default;
-		BitAccessor(const BitAccessor&) = delete;
-		BitAccessor(BitAccessor&&) noexcept = default;
-		BitAccessor& operator=(const BitAccessor&) = delete;
-		BitAccessor& operator=(BitAccessor&&) noexcept = default;
-		BitAccessor& operator=(const bool v) { bst_.Set(idx_, v); return *this; }
-		[[nodiscard]] operator bool() const { return bst_.Get(idx_); }
-	private:
-		BitSet& bst_;
-		const std::int32_t idx_ = -1;
-	};
-public:
+    BitSet() = default;
+    BitSet(const int32_t n_size);
+    BitSet(const BitSet& copy);
+    BitSet(BitSet&& copy) noexcept;
+    BitSet(const std::initializer_list<bool>& copy_list);
 
-	BitSet() = default;
-	BitSet(const BitSet&) = default;
-	BitSet(BitSet&& rhs) noexcept;
-	BitSet(const std::int32_t);
+    BitSet& operator=(const BitSet& copy);
+    BitSet& operator=(BitSet&& copy) noexcept;
 
-	BitSet& operator=(const BitSet&) = default;
-	BitSet& operator=(BitSet&&) = default;
-	
-	~BitSet() = default;
+    ~BitSet() = default;
 
-	[[nodiscard]] bool operator==(const BitSet& rhs) const noexcept;
+    [[nodiscard]] bool operator==(const BitSet& other) const noexcept;
+    [[nodiscard]] bool operator!=(const BitSet& other) const noexcept;
 
-  	[[nodiscard]] bool operator!=(const BitSet& rhs) const noexcept;
-	
-	int32_t GetSize() const noexcept;
-	
-	[[nodiscard]] bool Get(const int32_t idx) const;
+    [[nodiscard]] bool IsEmpty() const noexcept;
+    [[nodiscard]] int32_t Size() const noexcept;
+    void Clear() noexcept;
+    void Resize(const int32_t n_size);
 
-	void Set(const int32_t index, const bool val);
+    [[nodiscard]] bool Get(const int32_t index) const;
+    void Set(const int32_t index, const bool value);
 
-	void Resize(const int32_t size);
-	
-	void Fill(const bool val);
+    [[nodiscard]] BitSet operator~() const;
 
-	[[nodiscard]] BitSet& operator&=(const BitSet& rhs);
+    BitSet& operator&=(const BitSet& other);
+    BitSet& operator|=(const BitSet& other);
+    BitSet& operator^=(const BitSet& other);
 
-	[[nodiscard]] BitSet& operator|=(const BitSet& rhs);
+    void Fill(const bool value);
 
-	[[nodiscard]] BitSet& operator^=(const BitSet& rhs);
+    friend std::ostream& operator<<(std::ostream& stream, const BitSet& bs);
+    friend std::istream& operator>>(std::istream& stream, BitSet& bs);
 
-	[[nodiscard]] BitSet operator~();
-
-	BitAccessor operator[](const int32_t idx) { return {*this, idx}; }
-
-	// std::ostream& WriteTxt(std::ostream&)
-	// std::ostream& WriteBinary(std::ostream&)
-	// std::istream& ReadTxt(std::istream&)
-	// std::istream& RaadBinary(std::istream&)
 
 private:
+    std::vector<uint32_t> data_;
+    size_t last_offset;
+    static const int32_t C_BLOCKSIZE = 32;
 
-	int32_t size_ = 0;
+    class iterator {
+    public:
+        iterator(uint32_t& n_elem, int32_t n_offset);
+        bool operator=(const bool value);
+        operator bool();
+    private:
+        uint32_t& elem;
+        int32_t offset;
+    };
 
-	std::vector<uint32_t> bits_;
+    static void negate_block(uint32_t& block) {
+        block = ~block;
+    }
 
+    void check_sizes_are_equal(const BitSet& other) const;
+
+public:
+    [[nodiscard]] iterator operator[](const int index);
 };
 
-// std::ostream& operaror<<(std::ostream&, const BitSet&);
-// std::istream& operaror>>(std::istream&, BitSet&);
-[[nodiscard]] BitSet operator&(const BitSet& lhs, const BitSet& rhs);
-[[nodiscard]] BitSet operator|(const BitSet& lhs, const BitSet& rhs);
-[[nodiscard]] BitSet operator^(const BitSet& lhs, const BitSet& rhs);
+BitSet operator&(const BitSet& left, const BitSet& right);
+BitSet operator|(const BitSet& left, const BitSet& right);
+BitSet operator^(const BitSet& left, const BitSet& right);
+
 
 #endif // !BITSET_BITSET_HPP

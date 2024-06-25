@@ -1,176 +1,251 @@
 #ifndef QUEUEARRT_QUEUEARRT_HPP
 #define QUEUEARRT_QUEUEARRT_HPP
-
-#include<cstddef>
-#include<memory>
-#include<stdexcept>
+#include <stdexcept>
+#include <initializer_list>
+#include <memory>
 
 template<class T>
-class QueueArrT
-{
+class QueueArrT {
 public:
-  QueueArrT() = default;
-  QueueArrT(const QueueArrT& queue);
-  QueueArrT(QueueArrT&& queue) noexcept;
+    [[nodiscard]] QueueArrT() = default;
+    [[nodiscard]] QueueArrT(const QueueArrT& copy_queuearr);
+    [[nodiscard]] QueueArrT(QueueArrT&& copy_queuearr);
+    [[nodiscard]] QueueArrT(const std::initializer_list<T>& init_list);
+    QueueArrT& operator=(const QueueArrT& copy_queuearr) noexcept;
+    QueueArrT& operator=(QueueArrT&& copy_queuearr) noexcept;
+    ~QueueArrT();
 
-  ~QueueArrT() = default;
-
-  QueueArrT& operator=(const QueueArrT& queue);
-  QueueArrT& operator=(QueueArrT&& queue) noexcept;
-
-  void Push(const T& data);
-  void Pop() noexcept;
-  void Clear() noexcept;
-
-  T& Top();
-  const T& Top() const;
-  bool IsEmpty() const noexcept;
+    [[nodiscard]] bool IsEmpty() const noexcept;
+    [[nodiscard]] T& Top()&;
+    [[nodiscard]] const T& Top() const&;
+    void Pop() noexcept;
+    void Push(const T& n_elem);
+    void Clear() noexcept;
 
 private:
-  void reallocate(std::ptrdiff_t size, const QueueArrT& source);
-  std::ptrdiff_t Count() const;
+    std::unique_ptr<T[]> data_arr_ = nullptr;
+    T* data_arr_end_ = nullptr;
+    T* head_ = nullptr;
+    T* tail_ = nullptr;
 
-  T* head_ = nullptr;
-  T* tail_ = nullptr;
+    void Enlarge() noexcept;
+    void Enlarge(const size_t n_size) noexcept;
 
-  std::unique_ptr<T[]> data_ = nullptr;
-  std::ptrdiff_t size_ = 0;
-  std::ptrdiff_t capacity_ = 0;
+    void Enlarge_nocopy() noexcept;
+    void Enlarge_nocopy(const size_t n_size) noexcept;
 };
 
 template<class T>
-QueueArrT<T>::QueueArrT(const QueueArrT<T>& queue) {
-  reallocate(queue.capacity_, queue);
+[[nodiscard]] QueueArrT<T>::QueueArrT(const QueueArrT& copy_queuearr) {
+    if (copy_queuearr.IsEmpty()) {
+        this->Clear();
+        return;
+    }
+
+    Enlarge(copy_queuearr.data_arr_end_ - copy_queuearr.data_arr_.get());
+    T* our = head_;
+    T* theirs = copy_queuearr.head_;
+    size_t counter = 0;
+
+    while (theirs != copy_queuearr.tail_ + 1) {
+        *our = *theirs;
+        ++our;
+        ++theirs;
+        ++counter;
+        if (theirs == copy_queuearr.data_arr_end_ && theirs != tail_ + 1) {
+            theirs = copy_queuearr.data_arr_.get();
+        }
+    }
+    tail_ = head_ + counter - 1;
 }
 
 template<class T>
-QueueArrT<T>::QueueArrT(QueueArrT<T>&& queue) noexcept {
-  std::swap(data_, queue.data_);
-  capacity_ = queue.capacity_;
-  size_ = queue.size_;
-  head_ = queue.head_;
-  tail_ = queue.tail_;
+[[nodiscard]] QueueArrT<T>::QueueArrT(QueueArrT&& copy_queuearr)
+    : data_arr_{ copy_queuearr.data_arr_.release() },
+    data_arr_end_{ copy_queuearr.data_arr_end_ },
+    head_{ copy_queuearr.head_ },
+    tail_{ copy_queuearr.tail_ } {
+    copy_queuearr.data_arr_end_ = copy_queuearr.head_ = copy_queuearr.tail_ = nullptr;
 }
 
 template<class T>
-QueueArrT<T>& QueueArrT<T>::operator=(const QueueArrT<T>& queue) {
-  if (&queue == this) {
+[[nodiscard]] QueueArrT<T>::QueueArrT(const std::initializer_list<T>& init_list) {
+    Enlarge(init_list.size());
+    for (size_t i = 0; i < init_list.size(); ++i) {
+        data_arr_[i] = init_list.begin()[i];
+    }
+    tail_ = head_ + init_list.size() - 1;
+    return;
+}
+
+template<class T>
+QueueArrT<T>& QueueArrT<T>::operator=(const QueueArrT& copy_queuearr) noexcept {
+    if (this == &copy_queuearr) {
+        return *this;
+    }
+
+    if (copy_queuearr.IsEmpty()) {
+        this->Clear();
+        return *this;
+    }
+
+    if (copy_queuearr.data_arr_end_ - copy_queuearr.data_arr_.get() > data_arr_end_ - data_arr_.get()) {
+        Enlarge_nocopy(copy_queuearr.data_arr_end_ - copy_queuearr.data_arr_.get());
+    }
+
+    T* our = head_;
+    T* theirs = copy_queuearr.head_;
+    size_t counter = 0;
+
+    while (theirs != copy_queuearr.tail_ + 1) {
+        *our = *theirs;
+        ++our;
+        ++theirs;
+        ++counter;
+        if (theirs == copy_queuearr.data_arr_end_ && theirs != tail_ + 1) {
+            theirs = copy_queuearr.data_arr_.get();
+        }
+    }
+    tail_ = head_ + counter - 1;
     return *this;
-  }
-  else {
-    if (queue.size_ > capacity_) {
-      reallocate(queue.capacity_, queue);
-    }
-    else {
-      std::copy(queue.head_,
-        (queue.tail_ > queue.head_) ? (queue.tail_ + 1) : (queue.data_.get() + queue.capacity_),
-        data_.get());
-      if (queue.tail_ < queue.head_) {
-        std::copy(queue.data_.get(),
-          queue.tail_ + 1,
-          data_.get() + (queue.data_.get() + queue.capacity_ - queue.head_));
-      }
-      capacity_ = queue.capacity_;
-      size_ = queue.size_;
-      head_ = data_.get();
-      tail_ = head_ + size_ - 1;
-    }
-  }
-
-  return *this;
 }
 
 template<class T>
-QueueArrT<T>& QueueArrT<T>::operator=(QueueArrT<T>&& queue) noexcept {
-  if (this != &queue) {
-    std::swap(data_, queue.data_);
-    capacity_ = queue.capacity_;
-    size_ = queue.size_;
-    head_ = queue.head_;
-    tail_ = queue.tail_;
-  }
+QueueArrT<T>& QueueArrT<T>::operator=(QueueArrT&& copy_queuearr) noexcept {
+    if (this == &copy_queuearr) {
+        return *this;
+    }
 
-  return *this;
+    std::swap(data_arr_, copy_queuearr.data_arr_);
+    std::swap(data_arr_end_, copy_queuearr.data_arr_end_);
+    std::swap(head_, copy_queuearr.head_);
+    std::swap(tail_, copy_queuearr.tail_);
+    return *this;
 }
 
 template<class T>
-void QueueArrT<T>::Push(const T& data) {
-  if (size_ == 0) {
-    if (capacity_ == 0) {
-      capacity_ = 1;
-      data_ = std::make_unique<T[]>(capacity_);
+QueueArrT<T>::~QueueArrT() {
+    head_ = tail_ = data_arr_end_ = nullptr;
+    return;
+}
+
+template<class T>
+[[nodiscard]] bool QueueArrT<T>::IsEmpty() const noexcept {
+    return data_arr_ == nullptr || head_ - tail_ == 1;
+}
+
+template<class T>
+[[nodiscard]] T& QueueArrT<T>::Top()& {
+    if (IsEmpty()) {
+        throw std::runtime_error("something bad happened");
     }
-    head_ = data_.get();
-    tail_ = head_;
-    *tail_ = data;
-    size_ += 1;
-  }
-  else {
-    if (size_ + 1 >= capacity_) {
-      reallocate(capacity_ * 2, *this);
+    return *head_;
+}
+
+template<class T>
+[[nodiscard]] const T& QueueArrT<T>::Top() const& {
+    if (IsEmpty()) {
+        throw std::runtime_error("something bad happened");
     }
-    tail_ = data_.get() + (head_ + size_ - data_.get()) % capacity_;
-    *tail_ = data;
-    ++size_;
-  }
+    return *head_;
 }
 
 template<class T>
 void QueueArrT<T>::Pop() noexcept {
-  if (!IsEmpty()) {
-    head_ = data_.get() + (head_ - data_.get() + 1) % capacity_;
-    --size_;
-  }
+    if (IsEmpty()) {
+        return;
+    }
+
+    ++head_;
+    if (head_ == data_arr_end_) {
+        head_ = data_arr_.get();
+        tail_ = head_ - 1;
+    }
+    return;
+}
+
+template<class T>
+void QueueArrT<T>::Push(const T& n_elem) {
+    if (data_arr_ == nullptr) {
+        Enlarge();
+    }
+    if (head_ == data_arr_.get() && tail_ == head_ - 1) {
+        tail_ = head_;
+        *tail_ = n_elem;
+        return;
+    }
+
+    T* new_tail_ = tail_ + 1;
+
+    if (new_tail_ == data_arr_end_) {
+        if (head_ != data_arr_.get()) {
+            new_tail_ = data_arr_.get();
+        }
+        else {
+            Enlarge();
+            new_tail_ = tail_ + 1;
+        }
+    }
+    if (new_tail_ == head_) {
+        Enlarge();
+        new_tail_ = tail_ + 1;
+    }
+
+    *new_tail_ = n_elem;
+    tail_ = new_tail_;
+    return;
 }
 
 template<class T>
 void QueueArrT<T>::Clear() noexcept {
-  size_ = 0;
+    head_ = data_arr_.get();
+    tail_ = head_ - 1;
+    return;
 }
 
 template<class T>
-T& QueueArrT<T>::Top() {
-  if (IsEmpty()) {
-    throw std::runtime_error("Queue is empty!");
-  }
-  return *head_;
+void QueueArrT<T>::Enlarge() noexcept {
+    Enlarge(data_arr_end_ - data_arr_.get());
+    return;
 }
 
 template<class T>
-const T& QueueArrT<T>::Top() const {
-  if (IsEmpty()) {
-    throw std::runtime_error("Queue is empty!");
-  }
-  return *head_;
-}
+void QueueArrT<T>::Enlarge(const size_t n_size) noexcept {
+    size_t new_data_size_ = n_size + n_size / 2 + 1;
+    std::unique_ptr<T[]> new_data_(new T[new_data_size_]);
+    size_t new_data_elem_ = 0;
 
-template<class T>
-bool QueueArrT<T>::IsEmpty() const noexcept {
-  return (size_ == 0);
-}
-
-template<class T>
-void QueueArrT<T>::reallocate(std::ptrdiff_t newCapacity, const QueueArrT& source) {
-  std::unique_ptr<T[]> newdata = std::make_unique<T[]>(newCapacity);
-  if (source.size_ != 0) {
-    std::copy(source.head_,
-      (source.tail_ > source.head_) ? (source.tail_ + 1) : (source.data_.get() + source.capacity_),
-      newdata.get());
-    if (source.tail_ < source.head_) {
-      std::copy(source.data_.get(),
-        source.tail_ + 1,
-        newdata.get() + (source.data_.get() + source.capacity_ - source.head_));
+    while (head_ != tail_ + 1 && head_ != nullptr) {
+        new_data_[new_data_elem_] = *head_;
+        ++new_data_elem_;
+        ++head_;
+        if (head_ == data_arr_end_ && head_ != tail_ + 1) {
+            head_ = data_arr_.get();
+        }
     }
-  }
-  std::swap(data_, newdata);
-  capacity_ = newCapacity;
-  size_ = source.size_;
-  head_ = data_.get();
-  tail_ = head_ + size_ - 1;
+
+    data_arr_.reset(new_data_.release());
+    data_arr_end_ = data_arr_.get() + new_data_size_;
+    head_ = data_arr_.get();
+    tail_ = head_ + new_data_elem_ - 1;
+    return;
 }
 
 template<class T>
-std::ptrdiff_t QueueArrT<T>::Count() const {
-  return IsEmpty() ? 0 : (tail_ + size_ - head_) % size_ + 1;
+void QueueArrT<T>::Enlarge_nocopy() noexcept {
+    Enlarge_nocopy(data_arr_end_ - data_arr_.get());
+    return;
 }
+
+template<class T>
+void QueueArrT<T>::Enlarge_nocopy(const size_t n_size) noexcept {
+    size_t new_data_size_ = n_size + n_size / 2 + 1;
+
+    data_arr_.reset(new T[new_data_size_]);
+    data_arr_end_ = data_arr_.get() + new_data_size_;
+    head_ = data_arr_.get();
+    tail_ = head_ - 1;
+    return;
+}
+
 #endif // !QUEUEARRT_QUEUEARRT_HPP
